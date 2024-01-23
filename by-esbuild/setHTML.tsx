@@ -1,4 +1,4 @@
-import { JSX, Fragment } from "https://esm.sh/preact@10.15.1"
+import { JSX, Fragment, ComponentProps } from "https://esm.sh/preact@10.15.1"
 import { toFileUrl, resolve } from "https://deno.land/std@0.200.0/path/mod.ts"
 
 import * as esbuild from "https://deno.land/x/esbuild@v0.19.2/mod.js"
@@ -7,6 +7,7 @@ import { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.2/mod.t
 import { HeaderHTML } from "./HeaderHTML.tsx"
 import TwindConfig from "../utils/twind.config.ts"
 
+type CSSTextString = string
 
 export type ViewConfig = {
   title: string,
@@ -14,7 +15,10 @@ export type ViewConfig = {
   crient_path: string,
   twind_config?: string | Record<string, unknown>,
   google_fonts?: Array<string>,
-  css?: string,
+  header_elem?: {
+    link?: Array<ComponentProps<"link">>,
+    style? : Array<CSSTextString>
+  },
   use_worker: boolean,
   port: number,
   preact_version?: string,
