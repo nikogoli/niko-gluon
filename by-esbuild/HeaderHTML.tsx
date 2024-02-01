@@ -6,9 +6,14 @@ export function HeaderHTML(props:{
   viewconfig: ViewConfig,
 }){
   const { title, google_fonts, twind_config, header_elem } = props.viewconfig
-  const fontlink = (google_fonts)
-    ? google_fonts.reduce((txt, f) => txt+`family=${f.replaceAll(" ", "+")}&`, "https://fonts.googleapis.com/css2?") + "display=swap"
-    : null
+  let fontlink: string|null = null
+  if (google_fonts){
+    fontlink = google_fonts.reduce((txt, f) => {
+      return (typeof f == "string")
+        ? txt+`family=${f.replaceAll(" ", "+")}&`
+        : txt+`family=${f.name.replaceAll(" ", "+")}:wght@${f.weights.join(";")}&`
+    }, "https://fonts.googleapis.com/css2?") + "display=swap"
+  }
   
   const twind_config_script = (twind_config && typeof twind_config != "string")
     ? `twind.install(${JSON.stringify(twind_config)})`

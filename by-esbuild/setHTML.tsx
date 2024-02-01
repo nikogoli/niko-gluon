@@ -14,7 +14,7 @@ export type ViewConfig = {
   size: [number, number],
   crient_path: string,
   twind_config?: string | Record<string, unknown>,
-  google_fonts?: Array<string>,
+  google_fonts?: Array<string|{name:string, weights:Array<number>}>,
   header_elem?: {
     link?: Array<ComponentProps<"link">>,
     style? : Array<CSSTextString>
